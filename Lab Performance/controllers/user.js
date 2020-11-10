@@ -28,7 +28,7 @@ router.post('/create', (req, res)=>{
 	
 	userModel.insert(user,function(status){
 		if(status){
-			res.redirect('/ahome/userlist');
+			res.redirect('/Admin_home/userlist');
 		}else{
 			res.render('user/create');
 		}
@@ -36,26 +36,60 @@ router.post('/create', (req, res)=>{
 });
 
 router.get('/edit/:id', (req, res)=>{
-
-	var user = {
-		username: 'test',
-		password: 'test',
-		email: 'alamin@aiub.edu'
-	};
-	res.render('user/edit', user);
+	
+	userModel.getById(req.params.id,function(result){
+			var user = {
+				name: result.name,
+				username: result.username,
+				password: result.password,
+				companyname: result.companyname,
+				contactno: result.contactno,
+				type: 1
+			};
+			res.render('user/edit', user);
+	});
 });
 
 router.post('/edit/:id', (req, res)=>{
-	res.redirect('/home/userlist');
+	var user = {
+		id:req.params.id,
+		name: req.body.name,
+		username: req.body.username,
+		password: req.body.password,
+		companyname: req.body.companyname,
+		contactno: req.body.contactno,
+		type: 1
+	};
+	userModel.update(user,function(status){
+		if(status){
+			res.redirect('/Admin_home/userlist');
+		}
+		else{
+			res.render('user/edit', user);
+		}
+	});
 });
 
 router.get('/delete/:id', (req, res)=>{
-	var user = {username: 'alamin', password: '123', email: 'email@gmail.com'};
-	res.render('user/delete', user);
+	userModel.getById(req.params.id,function(result){
+		var user = {
+			name: result.name,
+			username: result.username,
+			password: result.password,
+			companyname: result.companyname,
+			contactno: result.contactno,
+			type: 1
+		};
+		res.render('user/delete', user);
+	});
 });
 
 router.post('/delete/:id', (req, res)=>{
-	res.redirect('/home/userlist');
+	userModel.delete(req.params.id,function(status){
+		if(status){
+			res.redirect('/Admin_home/userlist');
+		}
+	});
 });
 
 module.exports = router;
