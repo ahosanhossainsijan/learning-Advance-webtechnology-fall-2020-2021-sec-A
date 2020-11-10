@@ -6,7 +6,7 @@
 <body>
 	<h1> Userlist</h1>
 
-	<a href="/Admin_home">Back</a> | 
+	<a href="/ahome">Back</a> | 
 	<a href="/logout">logout</a> 
 	<br>
 
@@ -20,15 +20,15 @@
 			<td>Type</td>
 			<td>Action</td>
 		</tr>
-		<% 
-			users.forEach( function(std){ %>
+	    <% 
+			user.forEach( function(std){ %>
 			<tr>
 				<td><%= std.id %></td>
 				<td><%= std.name %></td>
 				<td><%= std.username %></td>
 				<td><%= std.companyname %></td>
 				<td><%= std.contactno %></td>
-				<% if(std.type == 0){%>
+				<% if(std.type == 1){%>
 					<td>Admin</td>
 				<%}
 				else{%>
