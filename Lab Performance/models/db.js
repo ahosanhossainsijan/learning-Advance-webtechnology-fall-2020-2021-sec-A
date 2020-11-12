@@ -19,7 +19,7 @@ var getConnection = function(callback){
 
 	callback(connection);
 
-}
+};
 
 module.exports = {
 	getResults: function (sql, callback){
@@ -37,7 +37,7 @@ module.exports = {
 	execute: function (sql, callback){
 		getConnection(function(connection){
 			connection.query(sql , function (error, status) {
-				
+				//console.log(status);
 				if(status){
 					callback(true);
 				}else{
@@ -50,7 +50,7 @@ module.exports = {
 			});		
 		});
 	}
-}
+};
 
 
 

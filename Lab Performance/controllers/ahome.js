@@ -11,7 +11,7 @@ router.get('*',  (req, res, next)=>{
 });
 
 router.get('/', (req, res)=>{
-	res.render('ahome/index', {name: 'alamin', id:'123'});
+	res.render('ahome/index', {name: req.cookies['uname']});
 });
 
 
@@ -21,6 +21,20 @@ router.get('/userlist', (req, res)=>{
 		res.render('ahome/userlist', {users: results});
 	});
 
-})
+});
+
+router.post('/search',(req,res)=>{
+	var user = {
+		search : req.body.search,
+		searchby: req.body.searchby
+	};
+	userModel.search(user, function(results){
+		if(results){
+			res.json({user:results});
+		}else{
+			res.json({user:'error'});
+		}
+	});
+});
 
 module.exports = router;

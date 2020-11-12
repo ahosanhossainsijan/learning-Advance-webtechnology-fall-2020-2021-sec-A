@@ -28,7 +28,7 @@ router.post('/create', (req, res)=>{
 	
 	userModel.insert(user,function(status){
 		if(status){
-			res.redirect('/Admin_home/userlist');
+			res.redirect('/ahome/userlist');
 		}else{
 			res.render('user/create');
 		}
@@ -62,7 +62,7 @@ router.post('/edit/:id', (req, res)=>{
 	};
 	userModel.update(user,function(status){
 		if(status){
-			res.redirect('/Admin_home/userlist');
+			res.redirect('/ahome/userlist');
 		}
 		else{
 			res.render('user/edit', user);
@@ -87,9 +87,10 @@ router.get('/delete/:id', (req, res)=>{
 router.post('/delete/:id', (req, res)=>{
 	userModel.delete(req.params.id,function(status){
 		if(status){
-			res.redirect('/Admin_home/userlist');
+			res.redirect('/ahome/userlist');
 		}
 	});
 });
 
 module.exports = router;
+
