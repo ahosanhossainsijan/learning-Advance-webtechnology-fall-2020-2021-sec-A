@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User List</title>
+	<script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src = "/assets/js/main.js"></script>
+</head>
+<body>
+	<h1> Userlist</h1>
+
+	<a href="/ahome">Back</a> | 
+	<a href="/logout">logout</a> 
+	<br>
+	<div>
+		<select id="searchby">
+			<option selected hidden>Searh By</option>
+			<option value="name">Name</option>
+			<option value="username">User Name</option>
+			<option value="companyname">Company Name</option>
+			<option value="contactno">Contact No</option>
+		</select>
+        <input type="text" name="search" id="search" placeholder="Search Employee">
+    </div>
+	<table border="1" id="table">
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>User Name</td>
+			<td>Company Name</td>
+			<td>Contact No</td>
+			<td>Type</td>
+			<td>Action</td>
+		</tr>
+		
+		<!-- <% for(var i=0; i < users.length; i++){ %>
+			
+			<tr>
+				<td><%= users[i][0] %></td>
+				<td><%= users[i][1] %></td>
+				<td><%= users[i][2] %></td>
+				<td><%= users[i][3] %></td>
+			</tr>
+
+		<% } %> -->
+		<% 
+			users.forEach( function(std){ %>
+			<tr>
+				<td><%= std.id %></td>
+				<td><%= std.name %></td>
+				<td><%= std.username %></td>
+				<td><%= std.companyname %></td>
+				<td><%= std.contactno %></td>
+				<% if(std.type == 0){%>
+					<td>Admin</td>
+				<%}
+				else{%>
+					<td>Employee</td>
+				<%}%>
+				<td>
+					<a href="/user/edit/<%= std.id %>">Edit</a> |
+					<a href="/user/delete/<%= std.id %>">Delete</a>
+				</td>
+			</tr>
+
+		<%
+			}); 
+		%>
+		
+	</table>
+
+</body>
+</html>
