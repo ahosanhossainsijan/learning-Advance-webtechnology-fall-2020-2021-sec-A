@@ -1,5 +1,5 @@
 const express 		= require('express');
-//const userModel		= require.main.require('./models/userModel');
+const userModel		= require.main.require('./models/userModel');
 const router 		= express.Router();
 
 router.get('/', (req, res)=>{
@@ -8,26 +8,25 @@ router.get('/', (req, res)=>{
 
 router.post('/', (req, res)=>{
 
-	// var user = {
-	// 	username: req.body.username,
-	// 	password: req.body.password
-	// };
-//res.cookie('uname', req.body.username);
-//res.redirect('/adminhome');
-res.redirect('/customerhome');
-	// userModel.validate(user, function(status){
-	// 	if(status == 0){
-	// 		res.cookie('uname', req.body.username);
-	// 		res.redirect('/ahome');
-	// 	}
-	// 	else if(status == 1){
-	// 		res.cookie('uname', req.body.username);
-	// 		res.redirect('/ehome');
-	// 	}
-	// 	else{
-	// 		res.redirect('/login');
-	// 	}
-	// });
+	 var user = {
+		username: req.body.username,
+		password: req.body.password
+	};
+
+
+	 userModel.validate(user, function(status){
+		if(status == 0){
+	 		res.cookie('uname', req.body.username);
+	 		res.redirect('/adminhome');
+	 	}
+		else if(status == 1){
+		res.cookie('uname', req.body.username);
+		res.redirect('/customerhome');
+		}
+		else{
+			res.redirect('/login');
+		}
+	});
 }); 
 
 module.exports = router;
