@@ -1,22 +1,17 @@
 //declaration
-const express 			= require('express');	
+const express 			= require('express');
 const bodyParser 		= require('body-parser');
 const exSession 		= require('express-session');
 const cookieParser 		= require('cookie-parser');
-const registration	    = require('./controllers/registration');
 const login				= require('./controllers/login');
-const logout			= require('./controllers/logout');
-const adminhome		    = require('./controllers/adminhome');
-const customerhome		= require('./controllers/customerhome');
-// const user				= require('./controllers/user');
-// const job				= require('./controllers/job');
+const logout			= require('./Controllers/logout');
+const admin				= require('./Controllers/Admin');
+const user				= require('./Controllers/user');
 const app				= express();
 const port				= 3000;
 
-
 //configuration
 app.set('view engine', 'ejs');
-
 
 //middleware
 app.use('/assets', express.static('assets'));
@@ -25,17 +20,13 @@ app.use(cookieParser());
 app.use(exSession({secret: 'secret value', saveUninitialized: true, resave: false}));
 
 app.use('/login', login);
-app.use('/registration', registration);
-app.use('/adminhome', adminhome);
-app.use('/customerhome',customerhome);
-app.use('/logout', logout);
-// app.use('/user', user);
-// app.use('/job',job);
+app.use('/logout',logout);
+app.use('/Admin', admin);
+app.use('/user',user);
 
 //router
-
 app.get('/', (req, res)=>{
-	res.send('Welcome');
+	res.render("login/index");
 });
 
 //server startup
