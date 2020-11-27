@@ -1,8 +1,8 @@
 const db = require('./db');
 
 module.exports= {
-	insert: function(car, callback){
-		var sql = "INSERT INTO books(name,rentprice, description,type,image) VALUES ('"+car.name+"','"+car.rentprice+"','"+car.description+"','"+car.type+"','"+car.image+"')";
+	insert: function(book, callback){
+		var sql = "INSERT INTO books(bookname,authorname, category,price,image,availability) VALUES ('"+book.bookname+"','"+book.authorname+"','"+book.category+"','"+book.price+"','"+book.image+"','"+book.availability+"')";
 		db.execute(sql,function(status){
 			callback(status);
 		});
@@ -21,8 +21,8 @@ module.exports= {
 			callback(results[0]);
 		});
 	},
-	update:function(car, callback){
-		var sql = "UPDATE books SET name='"+car.name+"',description='"+car.description+"',type='"+car.type+"',rentprice='"+car.rentprice+"',image='"+car.image+"',availability = '"+car.availability+"' WHERE id = '"+car.id+"'";
+	update:function(book, callback){
+		var sql = "UPDATE books SET bookname='"+book.bookname+"',authorname='"+book.authorname+"',category='"+book.category+"',price='"+book.price+"',image='"+book.image+"',availability = '"+book.availability+"' WHERE id = '"+car.id+"'";
 		db.execute(sql,function(status){
 			callback(status);
 		});
@@ -51,13 +51,13 @@ module.exports= {
 			callback(results);
 		});
 	},
-	getCar : function(car,callback){
+	getCar : function(book,callback){
 		var sql;
 		if(car.availability == '*'){
-			sql = "select * from books where type LIKE '%"+car.see+"%'";
+			sql = "select * from books where type LIKE '%"+book.see+"%'";
 		}
 		else{
-			sql = "select * from books where availability = '"+car.availability+"' and type LIKE '%"+car.see+"%'";
+			sql = "select * from books where availability = '"+book.availability+"' and type LIKE '%"+book.see+"%'";
 		}
 		db.getResults(sql, function(results){
 			callback(results);

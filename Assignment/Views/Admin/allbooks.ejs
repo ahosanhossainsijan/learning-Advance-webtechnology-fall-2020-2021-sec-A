@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/styles/mystyle.css">
+        <link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src = "/assets/js/admin.js"></script>
+	</head>
+	<body>
+		<div class="text-center">
+			<h1 class="header">Admin</h1>
+		</div>
+		<!--menu starts-->
+		<div class="text-center">
+			<a href="/Admin" class="btn btn-primary">Dashboard</a>
+			<a href="/admin/allcars" class="btn btn-warning">All Cars</a>
+			<a href="/admin/addnewcar" class="btn btn-danger">Add Car</a>
+			<a href="/admin/allusers" class="btn btn-warning">All Users</a>
+            <a href="/admin/addnewadmin" class="btn btn-info">Add New Admin</a>
+            <a href="/admin/renthistory" class="btn btn-info">See Rent History</a>
+            <a href="/admin/profile" class="btn btn-info">Profile</a>
+			<a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+        
+        <div class="center">
+            <div class="form-group">
+                <label>Select Car type</label>
+                <select id="category" name="category" class="form-control">
+					<option value="">All</option>
+					<option value="Private Car">Private Car</option>
+					<option value="NOAH">NOAH</option>
+					<option value="Hiace">Hiace</option>
+					<option value="Micro Bus">Micro Bus</option>
+					<option value="Pick Up">Pick Up</option>
+					<option value="Others">Others</option>
+                </select>
+                <label>Show Availibility</label>
+                <select id="availability" name="availability" class="form-control">
+					<option value="*">All</option>
+					<option value="0">Available</option>
+					<option value="1">Busy</option>
+					<option value="2">Damaged</option>
+				</select>
+            </div>
+            
+            <h3 class="text">All Cars</h3>
+            <table class="table table-striped">
+                <thead>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Rent (Per Day)</td>
+                    <td>Description</td>
+                    <td>Image</td>
+                    <td>Type</td>
+                    <td>Status</td>
+                    <td></td>
+                </thead>
+                <tbody id="tbody">
+                    <% 
+                        cars.forEach( function(car){ %>
+                            <tr>
+                                <td><%= car.id %></td>
+                                <td><%= car.name %></td>
+                                <td><%= car.rentprice %></td>
+                                <td><%= car.description %></td>
+                                <td><img class="card-image" src="<%= car.image%>"></img></td>
+                                <td><%=car.type%></td>
+                                <%if(car.availability == 0){%>
+                                    <td>Available</td>
+                                <%}else if(car.availability == 1){%>
+                                    <td>Busy</td>
+                                <%}else{%>
+                                    <td>Damaged</td>
+                                <%}%>
+                                <td>
+                                    <a href="/admin/editcar/<%= car.id %>" class="btn btn-danger">view</a>
+                                </td>
+                            </tr>
+        
+                    <%
+                        }); 
+                    %>
+                </tbody>
+            </table>
+        </div>   
+	</body>
+</html>

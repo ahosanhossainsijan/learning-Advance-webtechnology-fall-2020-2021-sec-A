@@ -1,7 +1,7 @@
 const express 	= require('express');
 const userModel = require.main.require('./models/userModel');
-const carModel  = require.main.require('./models/carModel');
-const rentModel  = require.main.require('./models/rentModel');
+const bookModel  = require.main.require('./models/bookModel');
+const purchaseModel  = require.main.require('./models/purchaseModel');
 const router 	= express.Router();
 
 router.get('*',  (req, res, next)=>{
@@ -13,18 +13,19 @@ router.get('*',  (req, res, next)=>{
 });
 
 router.get('/', (req, res)=>{
-	var carCounts;
-	var rentCounts;
-	carModel.getCount(function(carCount){
-		carCounts = carCount.total;
-		rentModel.getCount(function(rentCount){
-			rentCounts = rentCount.total;
-			rentModel.getRecent(function(results){
-				console.log(carCounts,rentCounts);
-				res.render('Admin/index',{carCount : carCounts, rentCount : rentCounts, cars : results});
-			});
-		});
-	});
+	// var bookCounts;
+	// var purchaseCounts;
+	// bookModel.getCount(function(bookCount){
+	// 	carCounts = bookCount.total;
+	// 	purchaseCounts.getCount(function(purchaseCount){
+	// 		purchaseCounts = purchaseCount.total;
+	// 		rentModel.getRecent(function(results){
+	// 			console.log(carCounts,rentCounts);
+	//{carCount : carCounts, rentCount : rentCounts, cars : results}
+				res.render('Admin/index');
+			//});
+		//});
+	//});
 });
 
 router.get('/profile',(req,res)=>{
@@ -41,11 +42,11 @@ router.get('/profile',(req,res)=>{
 	});
 });
 
-router.get('/renthistory',(req,res)=>{
-	rentModel.getAll(function(results){
-		res.render('Admin/history',{rents : results});
-	});
-});
+// router.get('/renthistory',(req,res)=>{
+// 	rentModel.getAll(function(results){
+// 		res.render('Admin/history',{rents : results});
+// 	});
+// });
 
 router.get('/edit',(req,res)=>{
 	userModel.getById(req.cookies['uid'],function(result){
@@ -128,86 +129,87 @@ router.post('/deleteuser/:id', (req, res)=>{
 	});
 });
 
-router.get('/allcars',(req,res)=>{
-	carModel.getAll(function(results){
-		res.render('admin/allcars', {cars: results});
+ router.get('/allbooks',(req,res)=>{
+	bookModel.getAll(function(results){
+		res.render('admin/allbooks', {bookss: results});
 	});
 });
 
-router.get('/addnewcar',(req,res)=>{
-	res.render('admin/addnewcar');
+router.get('/addnewbook',(req,res)=>{
+	res.render('admin/addnewbook');
 });
 
-router.post('/addnewcar',(req,res)=>{
+router.post('/addnewbook',(req,res)=>{
 	var car = {
-		name: req.body.name,
-		rentprice: req.body.rentprice,
-		description: req.body.description,
-		type: req.body.type,
-		image: req.body.image
+		bookname: req.body.bookname,
+		authorname: req.body.authorname,
+		category: req.body.category,
+		price: req.body.price,
+		image: req.body.image,
+		availability: 1
 	};
-	carModel.insert(car,function(status){
+	bookModel.insert(book,function(status){
 		if(status){
 			res.redirect('/admin/allcars');
 		}else{
-			res.render('/admin/addnewcar',car);
+			res.render('/admin/addnewbook',car);
 		}
 	});
 });
 
-router.get('/deletecar/:id', (req, res)=>{
-	carModel.delete(req.params.id,function(status){
+router.get('/deletebook/:id', (req, res)=>{
+	bookModel.delete(req.params.id,function(status){
 		if(status){
 			res.redirect('/admin/allcars');
 		}
 	});
 });
 
-router.get('/editcar/:id', (req, res)=>{
+router.get('/editbook/:id', (req, res)=>{
 	carModel.getById(req.params.id,function(result){
-		var car = {
+		var book = {
 			id:req.params.id,
-			name: result.name,
-			rentprice: result.rentprice,
-			description: result.description,
-			type: result.type,
-			availability : result.availability,
-			image: result.image
+			bookname: result.bookname,
+		    authorname: result.authorname,
+			category: result.category,
+			price: result.price,
+			image: result.image,
+			availability: 1
 		};
-		res.render('admin/editcar', car);
+		res.render('admin/editbook', book);
 	});
 });
 
-router.post('/editcar/:id',(req,res)=>{
+router.post('/editbook/:id',(req,res)=>{
 	var car = {
-		id:req.params.id,
-		name: req.body.name,
-		rentprice: req.body.rentprice,
-		description: req.body.description,
-		type: req.body.type,
-		availability : req.body.availability,
-		image: req.body.image
+			id:req.params.id,
+			bookname: req.body.bookname,
+		    authorname: req.body.authorname,
+			category: req.body.category,
+			price: req.body.price,
+			image: req.body.image,
+			availability: 1
 	};
-	carModel.update(car,function(status){
+	bookModel.update(book,function(status){
 		if(status){
 			res.redirect('/admin/allcars');
 		}
 		else{
-			res.render('Admin/editcar', car);
+			res.render('Admin/editcar', book);
 		}
 	});
 });
 
-router.post('/getCar',(req,res)=>{
-	var car = {
+router.post('/getBook',(req,res)=>{
+	var book = {
 		see : req.body.see,
 		availability : req.body.availability
 	};
-	carModel.getCar(car,function(results){
+	bookModel.getBook(bookr,function(results){
 		if(results!=null){
-			res.json({cars:results});
+			res.json({books:results});
 		}else{
-			res.json({cars:false});
+			res.json({books:false});
 		}
 	});
 });

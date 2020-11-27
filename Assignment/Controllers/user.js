@@ -1,8 +1,8 @@
 const express 	= require('express');
 const session = require('express-session');
-const rentModel = require('../Models/rentModel');
+const purchaseModel = require('../Models/purchaseModel');
 const userModel = require.main.require('./models/userModel');
-const carModel  = require.main.require('./models/carModel');
+const bookModel  = require.main.require('./models/bookModel');
 const router 	= express.Router();
 
 router.get('*',  (req, res, next)=>{
