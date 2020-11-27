@@ -13,19 +13,9 @@ router.get('*',  (req, res, next)=>{
 });
 
 router.get('/', (req, res)=>{
-	// var bookCounts;
-	// var purchaseCounts;
-	// bookModel.getCount(function(bookCount){
-	// 	carCounts = bookCount.total;
-	// 	purchaseCounts.getCount(function(purchaseCount){
-	// 		purchaseCounts = purchaseCount.total;
-	// 		rentModel.getRecent(function(results){
-	// 			console.log(carCounts,rentCounts);
-	//{carCount : carCounts, rentCount : rentCounts, cars : results}
-				res.render('Admin/index');
-			//});
-		//});
-	//});
+	
+		res.render('Admin/index');
+			
 });
 
 router.get('/profile',(req,res)=>{
@@ -42,11 +32,11 @@ router.get('/profile',(req,res)=>{
 	});
 });
 
-// router.get('/renthistory',(req,res)=>{
-// 	rentModel.getAll(function(results){
-// 		res.render('Admin/history',{rents : results});
-// 	});
-// });
+router.get('/purchasehistory',(req,res)=>{
+	purchaseModel.getAll(function(results){
+		res.render('Admin/history',{purchase : results});
+	});
+});
 
 router.get('/edit',(req,res)=>{
 	userModel.getById(req.cookies['uid'],function(result){
@@ -131,7 +121,7 @@ router.post('/deleteuser/:id', (req, res)=>{
 
  router.get('/allbooks',(req,res)=>{
 	bookModel.getAll(function(results){
-		res.render('admin/allbooks', {bookss: results});
+		res.render('admin/allbooks', {books: results});
 	});
 });
 
@@ -140,19 +130,19 @@ router.get('/addnewbook',(req,res)=>{
 });
 
 router.post('/addnewbook',(req,res)=>{
-	var car = {
+	var book = {
 		bookname: req.body.bookname,
 		authorname: req.body.authorname,
 		category: req.body.category,
 		price: req.body.price,
 		image: req.body.image,
-		availability: 1
+		availability: req.body.availability
 	};
 	bookModel.insert(book,function(status){
 		if(status){
-			res.redirect('/admin/allcars');
+			res.redirect('/admin/allbooks');
 		}else{
-			res.render('/admin/addnewbook',car);
+			res.render('/admin/addnewbook',books);
 		}
 	});
 });
@@ -166,7 +156,7 @@ router.get('/deletebook/:id', (req, res)=>{
 });
 
 router.get('/editbook/:id', (req, res)=>{
-	carModel.getById(req.params.id,function(result){
+	bookModel.getById(req.params.id,function(result){
 		var book = {
 			id:req.params.id,
 			bookname: result.bookname,
@@ -174,28 +164,28 @@ router.get('/editbook/:id', (req, res)=>{
 			category: result.category,
 			price: result.price,
 			image: result.image,
-			availability: 1
+			availability: result.availability
 		};
 		res.render('admin/editbook', book);
 	});
 });
 
 router.post('/editbook/:id',(req,res)=>{
-	var car = {
+	var book = {
 			id:req.params.id,
 			bookname: req.body.bookname,
 		    authorname: req.body.authorname,
 			category: req.body.category,
 			price: req.body.price,
 			image: req.body.image,
-			availability: 1
+			availability: req.body.availability
 	};
 	bookModel.update(book,function(status){
 		if(status){
-			res.redirect('/admin/allcars');
+			res.redirect('/admin/allbooks');
 		}
 		else{
-			res.render('Admin/editcar', book);
+			res.render('Admin/editbook', book);
 		}
 	});
 });
@@ -203,9 +193,8 @@ router.post('/editbook/:id',(req,res)=>{
 router.post('/getBook',(req,res)=>{
 	var book = {
 		see : req.body.see,
-		availability : req.body.availability
 	};
-	bookModel.getBook(bookr,function(results){
+	bookModel.getBookbyCategory(book,function(results){
 		if(results!=null){
 			res.json({books:results});
 		}else{

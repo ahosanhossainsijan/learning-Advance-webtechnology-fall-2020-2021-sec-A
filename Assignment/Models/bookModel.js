@@ -45,24 +45,13 @@ module.exports= {
 			callback(results);
 		});
 	},
-	getCarbyCategory : function(car,callback){
-		var sql = "select * from books where availability = 0 and type LIKE '%"+car.see+"%'";
+	getBookbyCategory : function(book,callback){
+		var sql = "select * from books where category LIKE '%"+book.see+"%'";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 	},
-	getCar : function(book,callback){
-		var sql;
-		if(car.availability == '*'){
-			sql = "select * from books where type LIKE '%"+book.see+"%'";
-		}
-		else{
-			sql = "select * from books where availability = '"+book.availability+"' and type LIKE '%"+book.see+"%'";
-		}
-		db.getResults(sql, function(results){
-			callback(results);
-		});
-	},
+	
 	delete: function(id, callback){
 		var sql = "DELETE FROM books WHERE id = '"+id+"'";
 		db.execute(sql,function(status){
