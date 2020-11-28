@@ -150,7 +150,7 @@ router.post('/addnewbook',(req,res)=>{
 router.get('/deletebook/:id', (req, res)=>{
 	bookModel.delete(req.params.id,function(status){
 		if(status){
-			res.redirect('/admin/allcars');
+			res.redirect('/admin/allbooks');
 		}
 	});
 });

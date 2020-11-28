@@ -16,13 +16,10 @@
 		</div>
 		<!--menu starts-->
 		<div class="text-center">
-            <a href="/Admin" class="btn btn-primary">Dashboard</a>
-            <a href="/admin/allbooks" class="btn btn-warning">All Books</a>
-            <a href="/admin/addnewbook" class="btn btn-danger">Add Book</a>
-            <a href="/admin/allusers" class="btn btn-warning">All Users</a>
-            <a href="/admin/addnewadmin" class="btn btn-info">Add New Admin</a>
-            <a href="/admin/purchasehistory" class="btn btn-info">See Purchase History</a>
-            <a href="/admin/profile" class="btn btn-info">Profile</a>
+            <a href="/user" class="btn btn-primary">Dashboard</a>
+            <a href="/user/allbooks" class="btn btn-warning">All Books</a>
+            <a href="/user/purchasehistory" class="btn btn-info">See Purchase History</a>
+            <a href="/user/profile" class="btn btn-info">Profile</a>
             <a href="/logout" class="btn btn-danger">Logout</a>
         </div>
         
@@ -60,7 +57,7 @@
                                 <td><img class="card-image" src="<%= book.image%>"></img></td>
                                 <td><%= book.availability%></td>
                                 <td>
-                                    <a href="/admin/editbook/<%= book.id %>" class="btn btn-danger">view</a>
+                                    <a href="/user/bookinfo/<%= book.id %>" class="btn btn-danger">Buy</a>
                                 </td>
                             </tr>
         

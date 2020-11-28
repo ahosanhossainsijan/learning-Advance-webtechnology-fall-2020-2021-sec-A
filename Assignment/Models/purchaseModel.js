@@ -25,8 +25,9 @@ module.exports= {
 	// 		callback(results);
 	// 	});
 	// },
-	getAll : function(callback){
-		var sql = "SELECT u.name as name,u.contactno as contact, b.bookname as bname, p.paymentmethod as method, p.amount as amount, p.purchasedate as date FROM purchase as p, books as b, users as u WHERE p.bid = b.id and p.uid = u.id";
+	getAll : function(id,callback){
+		var sql = "SELECT * from purchase where uid = '"+id+"'";
+		//var sql = "SELECT u.name as name,u.contactno as contact, b.bookname as bname, p.paymentmethod as method, p.amount as amount, p.purchasedate as date FROM purchase as p, books as b, users as u WHERE p.bid = b.id and p.uid = u.id";
 		db.getResults(sql, function(results){
 			callback(results);
 		});

@@ -22,7 +22,7 @@ module.exports= {
 		});
 	},
 	update:function(book, callback){
-		var sql = "UPDATE books SET bookname='"+book.bookname+"',authorname='"+book.authorname+"',category='"+book.category+"',price='"+book.price+"',image='"+book.image+"',availability = '"+book.availability+"' WHERE id = '"+car.id+"'";
+		var sql = "UPDATE books SET bookname='"+book.bookname+"',authorname='"+book.authorname+"',category='"+book.category+"',price='"+book.price+"',image='"+book.image+"',availability = '"+book.availability+"' WHERE id = '"+book.id+"'";
 		db.execute(sql,function(status){
 			callback(status);
 		});

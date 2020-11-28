@@ -11,17 +11,17 @@
 		<div class="text-center">
             <a href="/user" class="btn btn-primary">Dashboard</a>
             <a href="/user/allbooks" class="btn btn-warning">All Books</a>
-            <a href="/user/renthistory" class="btn btn-info">See Purchase History</a>
+            <a href="/user/purchasehistory" class="btn btn-info">See Purchase History</a>
             <a href="/user/profile" class="btn btn-info">Profile</a>
             <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>		
+        </div>	
         <div class="center">
             <h1 class="text text-center">Confirm Book</h1>
             <form method="post" class="form-horizontal form-material">
                 <div class="center">
                     <img class="card-image" src="<%=image%>">
-                    <h4 class="text"><strong>type :</strong><%= type %> </h4>
-                    <h4 class="text"><strong>Name : </strong><%= name %> </h4>
+                    <h4 class="text"><strong>Category :</strong><%= category %> </h4>
+                    <h4 class="text"><strong>Book Name : </strong><%= bookname %> </h4>
                     <h4 class="text"><strong>Price:</strong><%= price %> </h4>
                     <input type="number" name="price" value="<%= price%>" hidden/>
                     <h4 class="text"><strong>Author Name: </strong><%= authorname %> </h4>
@@ -30,7 +30,7 @@
                         <option value="0">Cash On Arrival</option>
                         <option value="1">Bkash</option>
                         <option value="2">Rocket</option>
-                        <option value="3">Dutch Bangla Bank</option>
+                        <option value="3">Internet Banking</option>
                     </select>
                 </div>
                 <div class="form-group text-center">

@@ -14,7 +14,7 @@
             <a href="/admin/addnewbook" class="btn btn-danger">Add Book</a>
             <a href="/admin/allusers" class="btn btn-warning">All Users</a>
             <a href="/admin/addnewadmin" class="btn btn-info">Add New Admin</a>
-            <a href="/admin/renthistory" class="btn btn-info">See Purchase History</a>
+            <a href="/admin/purchasehistory" class="btn btn-info">See Purchase History</a>
             <a href="/admin/profile" class="btn btn-info">Profile</a>
             <a href="/logout" class="btn btn-danger">Logout</a>
         </div>
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                     <% 
-                        books.forEach( function(std){ %>
+                        purchase.forEach( function(std){ %>
                             <tr>
                                 <td><%= std.bname %></td>
                                 <td><%= std.name %></td>

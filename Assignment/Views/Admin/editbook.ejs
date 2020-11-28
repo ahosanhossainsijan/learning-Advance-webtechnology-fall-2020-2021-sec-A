@@ -14,60 +14,55 @@
             <a href="/admin/addnewbook" class="btn btn-danger">Add Book</a>
             <a href="/admin/allusers" class="btn btn-warning">All Users</a>
             <a href="/admin/addnewadmin" class="btn btn-info">Add New Admin</a>
-            <a href="/admin/renthistory" class="btn btn-info">See Purchase History</a>
+            <a href="/admin/purchasehistory" class="btn btn-info">See Purchase History</a>
             <a href="/admin/profile" class="btn btn-info">Profile</a>
             <a href="/logout" class="btn btn-danger">Logout</a>
         </div>
         
         <div class="center">
-            <h1 class="text text-center">Edit Car</h1>
-            <form method="post" class="form-horizontal form-material">
+            <h1 class="text text-center">Edit Book</h1>
+            <form method="post" class="form-horizontal form-material"> 
+
+                
+                <div class="form-group">
+                    <h4 class="text">Book Name</h4> 
+                    <input type="text" name="bookname" class="form-control" value="<%=bookname%>">
+                </div>
 
                 <div class="form-group">
-                    <h4 class="text">Select Car type</h4> 
-                    <select name="type" class="form-control">
-                        <option selected hidden>Select car type</option>
-                        <option value="Private Car"<% if(type =="Private Car"){%>selected<% } %> >Private Car</option>
-                        <option value="NOAH" <% if(type =="NOAH"){%>selected<% } %>>NOAH</option>
-                        <option value="Hiace" <% if(type =="Hiace"){%>selected<% } %>>Hiace</option>
-                        <option value="Micro Bus" <% if(type =="Micro Bus"){%>selected<% } %>>Micro Bus</option>
-                        <option value="Pick Up" <% if(type =="Pick Up"){%>selected<% } %>>Pick Up</option>
-                        <option value="others" <% if(type =="Others"){%>selected<% } %>>Others</option>
+                    <h4 class="text">Author Name</h4> 
+                    <input type="text" name="authorname" class="form-control" value="<%= authorname %> ">
+                </div>
+                <div class="form-group">
+                    <h4 class="text">Select Book Category</h4> 
+                    <select name="category" class="form-control">
+                        <option selected hidden>Select Book Category</option>
+                        <option value="Story">Story</option>
+                        <option value="History">History</option>
+                        <option value="Poem">Poem</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <h4 class="text">Name</h4> 
-                    <input type="text" name="name" class="form-control" value="<%=name%>">
-                </div>
 
                 <div class="form-group">
-                    <h4 class="text">Rent (per Day)</h4> 
-                    <input type="text" name="rentprice" class="form-control" value="<%= rentprice %> ">
-                </div>
-
-                <div class="form-group">
-                    <h4 class="text">Description</h4> 
-                    <input type="text" name="description" class="form-control" value="<%= description %> ">
+                    <h4 class="text"></h4> 
+                    <input type="text" name="price" class="form-control" value="<%= price %> ">
                 </div>
                 
                 <div class="form-group">
                     <h4 class="text">Image</h4> 
                     <input type="text" name="image" class="form-control" value="<%= image %> ">
                 </div>
-
                 <div class="form-group">
-                    <h4 class="text">Availability</h4> 
-                    <select name="availability" class="form-control">
-                    <option <%if(availability == 0){%> selected <%}%> value="0">Availiable</option>
-                        <option <%if(availability == 1){%> selected <%}%> value="1">Busy</option>
-                        <option <%if(availability == 2){%> selected <%}%> value="2">Damaged</option>
-                    </select>
+                    <h4 class="text">No of Book Available</h4> 
+                    <input type="text" name="availability" class="form-control" value="<%= availability %> ">
                 </div>
 
+                
+
                 <div class="form-group text-center">
-                    <a href="/admin/allcars" class="btn btn-warning" value="Cancel">Cancel</a>
-                    <input type="submit" name="editcarinfo" class="btn btn-success" value="Update Car Info" class="form-control">
-                    <a href="/admin/deletecar/<%= id %> " class="btn btn-danger" value="delete">Delete</a>
+                    <a href="/admin/allbooks" class="btn btn-warning" value="Cancel">Cancel</a>
+                    <input type="submit" name="editbookinfo" class="btn btn-success" value="Update Book Info" class="form-control">
+                    <a href="/admin/deletebook/<%= id %> " class="btn btn-danger" value="delete">Delete</a>
                 </div>
             </form>
         </div>   

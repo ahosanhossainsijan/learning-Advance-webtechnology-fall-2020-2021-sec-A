@@ -34,6 +34,48 @@ router.get('/profile',(req,res)=>{
 	});
 });
 
+router.get('/allbooks',(req,res)=>{
+	bookModel.getAll(function(results){
+		res.render('User/allbooks', {books: results});
+	});
+});
+router.get('/bookinfo/:id', (req, res)=>{
+	bookModel.getById(req.params.id,function(result){
+		var book = {
+			bookname: result.bookname,
+		    authorname: result.authorname,
+			category: result.category,
+			price: result.price,
+			image: result.image,
+			availability: result.availability
+		};
+		res.render('User/bookinfo', book);
+	});
+});
+
+router.post('/bookinfo/:id', (req, res)=>{
+	var date = new Date().toISOString().slice(0,10);
+	var purchase = {
+		bid : req.params.id,
+		uid : req.cookies['uid'],
+		date : date,
+		amount: req.body.price,
+		paymentmethod : req.body.paymethod,
+	};
+	purchaseModel.insert(purchase,function(status){
+		
+		if(status){
+			res.redirect('/user/purchasehistory');
+		}
+	});
+});
+
+router.get('/purchasehistory',(req,res)=>{
+	purchaseModel.getAll(req.cookies['uid'],function(results){
+		res.render('user/history',{purchase : results});
+	});
+});
+
 router.get('/edit',(req,res)=>{
 	userModel.getById(req.cookies['uid'],function(result){
 		var user = {
